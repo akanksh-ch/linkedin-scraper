@@ -1,7 +1,14 @@
 <script setup>
     import JobsForm from './JobsForm.vue';
+    import JobsResults from './JobsResults.vue';
+    import { ref } from 'vue';
+    
+    const jobs = ref([
+        {'title': 'Software Testing Engineer', 'company': 'Dell', 'description': 'we want a passionate tester', 'location': 'Birmingham, United Kingdom'}
+    ])
 </script>
 
 <template>
     <JobsForm />
+    <JobsResults :jobs="jobs"/>
 </template>
