@@ -11,5 +11,13 @@ async function fetchLinkedInJobs(url) {
         data.location = jobs[i].querySelector('.job-search-card__location').innerText
         /* url.match(/^[^?]+/) */
         const job_descHTML = await fetch(jobs[i].querySelector('a').href.match(/^[^?]+/))
+        const dec_parser = DOMParser().parseFromString(job_descHTML)
+        data.description = dec_parser.querySelector('.show-more-less-html').innerText
     }
+    
+    return final
 }
+
+// test
+
+console.log(fetchLinkedInJobs('https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=software+engineer&location=London,%20United%20Kingdom'))
