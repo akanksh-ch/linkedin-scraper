@@ -1,13 +1,22 @@
 <script setup>
     const role = defineModel('role', {default:'Software Engineer'});
     const location = defineModel('location', {default:'London, United Kingdom'});
+    
+    function fetchJobs() {
+        const url = 'https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search'
+        const keywords = role.value.toLowerCase().split(' ').join('+') // The job role converted to lower+case format
+        const location_data = encodeURI(location.value)
+        
+        console.log(`${url}?keywords=${keywords}&location=${location_data}`)
+    }
+
 </script>
 <template>
     <form>
         <label :for="role">Role<input :id="role" name="role" type="text" v-model="role" /></label>
         <label :for="location">Location<input :id="location" name="location" type="text" v-model="location" /></label>
     </form>
-    <button>Fetch Jobs</button>
+    <button @click="fetchJobs">Fetch Jobs</button>
 </template>
 
 <style scoped>
