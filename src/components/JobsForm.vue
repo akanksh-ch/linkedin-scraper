@@ -7,6 +7,7 @@
         <label :for="role">Role<input :id="role" name="role" type="text" v-model="role" /></label>
         <label :for="location">Location<input :id="location" name="location" type="text" v-model="location" /></label>
     </form>
+    <button>Fetch Jobs</button>
 </template>
 
 <style scoped>
@@ -21,7 +22,16 @@
         border-radius: 0.25rem;
     }
     
-    input {
+    input, button {
         margin-left: 1rem;
     }
-</style>
+    
+    button {
+        background-color: #007AFF;
+        color: white;
+        border-radius: 1rem;
+        border: none;
+        font-size: 1rem;
+        padding: 0.4rem;
+    }
+   </style>
