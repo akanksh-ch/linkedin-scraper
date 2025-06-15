@@ -33,5 +33,6 @@
         border: none;
         font-size: 1rem;
         padding: 0.4rem;
+        outline: none;
     }
    </style>
