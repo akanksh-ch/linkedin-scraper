@@ -3,10 +3,13 @@ async function fetchLinkedInJobs(url) {
     const jobsHTML = fetch(url)
     const doc = DOMParser().parseFromString(jobsHTML, 'text/html')
     let final = []
-    doc.querySelectorAll('li').forEach(function(elem) {
+    const jobs = doc.querySelectorAll('li')
+    for (let i = 0; i < jobs.length; i++) {
         let data = {} 
-        data.title = elem.querySelector('.base-search-card__title').innerText
-        data.company = elem.querySelector('.hidden-nested-link').innerText
-        data.location = elem.querySelector('.job-search-card__location').innerText
-    })
+        data.title = jobs[i].querySelector('.base-search-card__title').innerText
+        data.company = jobs[i].querySelector('.hidden-nested-link').innerText
+        data.location = jobs[i].querySelector('.job-search-card__location').innerText
+        /* url.match(/^[^?]+/) */
+        const job_descHTML = await fetch(jobs[i].querySelector('a').href.match(/^[^?]+/))
+    }
 }
