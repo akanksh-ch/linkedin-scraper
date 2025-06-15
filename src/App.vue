@@ -1,6 +1,6 @@
 <script setup>
-    import JobsForm from './components/JobsForm.vue';
+    import JobsPage from './components/JobsPage.vue';
 </script>
 <template>
-    <JobsForm/>
+    <JobsPage/>
 </template>
