@@ -26,7 +26,13 @@ Deno.serve(async (req) => {
     const jobsDescUrl: string = jobs[i].querySelector('a')?.getAttribute('href')?.match(/^[^?]+/)?.[0] ?? 'https://example.com';
     const jobsDescFetched = await(await fetch(jobsDescUrl)).text();
     const jobsDescDoc = new DOMParser().parseFromString(jobsDescFetched, 'text/html');
-    info.description = jobsDescDoc.querySelector('.show-more-less-html')?.innerText ?? 'No job description found';
+    info.description = jobsDescDoc.querySelector('.show-more-less-html')?.innerText        
+    // to get rid of show more/less and remove excess white space and newlines
+      .replace(/Show more|Show less/gi, "")
+      .replace(/\s+/g, " ")
+      .replace(/\n/g, " ")
+      .trim()
+      ?? 'No job description found';
     
     final.push(info)
   }
