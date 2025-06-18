@@ -30,7 +30,6 @@ Deno.serve(async (req) => {
     // to get rid of show more/less and remove excess white space and newlines
       .replace(/Show more|Show less/gi, "")
       .replace(/\s+/g, " ")
-      .replace(/\n/g, " ")
       .trim()
       ?? 'No job description found';
     
