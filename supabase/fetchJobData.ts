@@ -18,12 +18,14 @@ Deno.serve(async (req) => {
   const final = [] 
   
   for(let i = 0; i < jobs.length; i++) {
-    const info: {title: string, company: string, location: string, description: string} = {title: '', company: '', location: '', description: ''};
+    const info: {title: string, company: string, location: string, url: string, description: string} = {title: '', company: '', location: '', url: '', description: ''};
     info.title = jobs[i].querySelector('.base-search-card__title')?.innerText ?? 'No title found';
     info.company = jobs[i].querySelector('.hidden-nested-link')?.innerText ?? 'No company found';
     info.location = jobs[i].querySelector('.job-search-card__location')?.innerText ?? 'No Location found';
 
     const jobsDescUrl: string = jobs[i].querySelector('a')?.getAttribute('href')?.match(/^[^?]+/)?.[0] ?? 'https://example.com';
+    info.url = jobsDescUrl;
+    
     const jobsDescFetched = await(await fetch(jobsDescUrl)).text();
     const jobsDescDoc = new DOMParser().parseFromString(jobsDescFetched, 'text/html');
     info.description = jobsDescDoc.querySelector('.show-more-less-html')?.innerText ?? 'No job description found';
