@@ -30,4 +30,7 @@
   a:link {
     color: hsl(220, 100%, 50%) 
   }
+  a:visited {
+    color: hsl(220, 100%, 75%) 
+  }
 </style>
