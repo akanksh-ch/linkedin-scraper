@@ -4,7 +4,7 @@
 
 <template>
   <div :class="wrapper">
-    <div class="jobs" v-if="jobs.length > 0" v-for="job in jobs" :key="job.title">
+    <div class="job" v-if="jobs.length > 0" v-for="job in jobs" :key="job.title">
       {{ job }}
     </div>  
   </div>
@@ -16,7 +16,7 @@
     flex-direction: row;
     gap: 1rem;
   }
-  .jobs {
+  .job {
     border: solid hsla(0, 0%, 100%, 0.5) 1px;
     border-radius: 0.25rem;
     margin: 1rem;
