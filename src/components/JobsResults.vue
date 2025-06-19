@@ -16,11 +16,13 @@
     display: flex;
     flex-direction: row;
     gap: 1rem;
+    flex-wrap: wrap;
   }
   .job {
     border: solid hsla(0, 0%, 100%, 0.5) 1px;
     border-radius: 0.25rem;
     margin: 1rem;
+    padding: 1rem;
   }
   a {
     text-decoration: none;
