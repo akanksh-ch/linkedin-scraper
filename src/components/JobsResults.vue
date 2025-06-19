@@ -1,7 +1,5 @@
 <script setup>
-  import { toRef } from 'vue';
-  const props = defineProps({jobs: {type: Array}})
-  const jobs = toRef(props, 'jobs')
+  const jobs = defineModel('jobs', {default: []})
 </script>
 
 <template>
