@@ -3,28 +3,23 @@
 </script>
 
 <template>
-  <table>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Company</th>
-        <th>Description</th>
-        <th>Location</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(job, i) in jobs" :key="i">
-        <td>{{ job.title }}</td>
-        <td>{{ job.company }}</td>
-        <td>{{ job.description }}</td>
-        <td>{{ job.location }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div :class="wrapper">
+    <div class="jobs" v-if="jobs.length > 0" v-for="job in jobs" :key="job.title">
+      {{ job }}
+    </div>  
+  </div>
 </template>
 
 <style scoped>
-  table, th, td {
-    border: 1px solid white
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
   }
+  .jobs {
+    border: solid hsla(0, 0%, 100%, 0.5) 1px;
+    border-radius: 0.25rem;
+    margin: 1rem;
+  }
+
 </style>

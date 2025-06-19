@@ -1,6 +1,7 @@
 <script setup>
     const role = defineModel('role', {default:'Software Engineer'});
     const location = defineModel('location', {default:'London, United Kingdom'});
+    const jobs = defineModel('jobs', {default: [], type: Array})
     
     function fetchJobs() {
         const url = 'https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search'

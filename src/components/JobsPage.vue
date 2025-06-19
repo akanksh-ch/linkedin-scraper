@@ -10,5 +10,5 @@
 
 <template>
     <JobsForm />
-    <JobsResults :jobs="jobs"/>
+    <JobsResults v-model:jobs="jobs"/>
 </template>
