@@ -4,7 +4,7 @@
     import { ref } from 'vue';
     
     const jobs = ref([
-        {'title': 'Software Testing Engineer', 'company': 'Dell', 'description': 'we want a passionate tester', 'location': 'Birmingham, United Kingdom'}
+        {title: 'Software Testing Engineer', company: 'Dell', description: 'we want a passionate tester', location: 'Birmingham, United Kingdom', url: 'https://example.com'}
     ])
 </script>
 
