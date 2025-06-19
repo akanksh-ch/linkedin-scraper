@@ -9,6 +9,6 @@
 </script>
 
 <template>
-    <JobsForm />
+    <JobsForm v-model:jobs="jobs"/>
     <JobsResults v-model:jobs="jobs"/>
 </template>

@@ -4,11 +4,16 @@
     const jobs = defineModel('jobs', {default: [], type: Array})
     
     function fetchJobs() {
+        /*
         const url = 'https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search'
         const keywords = role.value.toLowerCase().split(' ').join('+') // The job role converted to lower+case format
         const location_data = encodeURI(location.value)
         
         console.log(`${url}?keywords=${keywords}&location=${location_data}`)
+        */
+        
+        console.log('fetchJobs triggered!')
+        jobs.value.push({title: 'Software Testing Engineer', company: 'Dell', description: 'we want a passionate tester', location: 'Birmingham, United Kingdom', url: 'https://example.com'})
     }
 
 </script>
