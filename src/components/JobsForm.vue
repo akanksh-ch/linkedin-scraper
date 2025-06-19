@@ -43,5 +43,6 @@
         font-size: 1rem;
         padding: 0.4rem;
         outline: none;
+        margin-bottom: 1rem;
     }
    </style>
