@@ -3,7 +3,17 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { DOMParser } from "jsr:@b-fuze/deno-dom";
 console.info("Server started");
 
+export const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+}
+
 Deno.serve(async (req) => {
+  // This is needed if you're planning to invoke your function from a browser.
+  if (req.method === 'OPTIONS') {
+    return new Response('ok', { headers: corsHeaders })
+  }
+
   const {keywords, location}: {keywords: string, location: string}
   = await req.json();
   
@@ -44,5 +54,5 @@ Deno.serve(async (req) => {
     final.push(info)
   }
 
-  return new Response(JSON.stringify(final), { headers: { 'Content-Type': 'application/json' } })
+  return new Response(JSON.stringify(final), { headers: {...corsHeaders, 'Content-Type': 'application/json' } })
 })

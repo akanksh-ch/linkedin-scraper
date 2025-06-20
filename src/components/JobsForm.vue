@@ -1,9 +1,10 @@
 <script setup>
+    import { supabase } from '../lib/supabaseClient';
     const role = defineModel('role', {default:'Software Engineer'});
     const location = defineModel('location', {default:'London, United Kingdom'});
     const jobs = defineModel('jobs', {default: [], type: Array})
     
-    function fetchJobs() {
+    async function fetchJobs() {
         /*
         const url = 'https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search'
         const keywords = role.value.toLowerCase().split(' ').join('+') // The job role converted to lower+case format
@@ -12,8 +13,12 @@
         console.log(`${url}?keywords=${keywords}&location=${location_data}`)
         */
         
-        console.log('fetchJobs triggered!')
-        jobs.value.push({title: 'Software Testing Engineer', company: 'Dell', description: 'we want a passionate tester', location: 'Birmingham, United Kingdom', url: 'https://example.com'})
+        console.log('fetch triggered!')
+        const dataFetched = await supabase.functions.invoke('fetchJobData', {
+            body: {name: 'Functions', keywords: role.value, location: location.value}
+        })
+        console.log(`resulted data: ${dataFetched}`)
+        jobs.value = dataFetched.data
     }
 
 </script>
