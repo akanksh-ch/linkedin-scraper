@@ -1,6 +1,8 @@
 // 'Supabase Edge Function: Fetch LinkedIn jobs
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { DOMParser } from "jsr:@b-fuze/deno-dom";
+import { createClient } from 'npm:@supabase/supabase-js'
+
 console.info("Server started");
 
 export const corsHeaders = {
@@ -9,6 +11,14 @@ export const corsHeaders = {
 }
 
 Deno.serve(async (req) => {
+  
+  // initialise supabase client
+  const supabase = createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
+      { global: { headers: { Authorization: req.headers.get('Authorization')! } } }
+    )
+
   // This is needed if you're planning to invoke your function from a browser.
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
