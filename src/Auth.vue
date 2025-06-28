@@ -30,7 +30,7 @@ const handleLogin = async () => {
 <template>
   <form  @submit.prevent="handleLogin">
     <div class="col-6 form-widget">
-      <h1 >Supabase + Vue 3</h1>
+      <h1 >Log into Linkedin Scraper</h1>
       <p >Sign in via magic link with your email below</p>
       <div>
         <input class="inputField" required type="email" placeholder="Your email" v-model="email" />
