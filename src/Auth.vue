@@ -12,7 +12,7 @@ const handleLogin = async () => {
     const { error } = await supabase.auth.signInWithOtp({
       email: email.value,
         options: {
-          emailRedirectTo: 'https://linkedin-scraper-htjvdvv1c-akanksh-chitimallas-projects.vercel.app/'
+          emailRedirectTo: 'https://linkedin-scraper-peach.vercel.app/'
       }
     })
     if (error) throw error
