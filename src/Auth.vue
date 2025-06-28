@@ -11,6 +11,9 @@ const handleLogin = async () => {
     console.log('This is the email:', email.value)
     const { error } = await supabase.auth.signInWithOtp({
       email: email.value,
+        options: {
+          emailRedirectTo: window.location.origin
+      }
     })
     if (error) throw error
     alert('Check your email for the login link!')
