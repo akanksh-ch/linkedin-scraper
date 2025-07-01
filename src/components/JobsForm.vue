@@ -17,7 +17,7 @@
         const dataFetched = await supabase.functions.invoke('fetchJobData', {
             body: {name: 'Functions', keywords: role.value, location: location.value}
         })
-        console.log(`resulted data: ${dataFetched}`)
+        console.log(`resulted data: ${JSON.stringify(dataFetched)}`)
         jobs.value = dataFetched.data
     }
 
