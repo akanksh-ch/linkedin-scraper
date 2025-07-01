@@ -1,6 +1,7 @@
 <script setup>
     import { supabase } from '../lib/supabaseClient';
     import { ref } from 'vue';
+    import LoadingAnimation from './LoadingAnimation.vue';
     const role = defineModel('role', {default:'Software Engineer'});
     const location = defineModel('location', {default:'London, United Kingdom'});
     const jobs = defineModel('jobs', {default: [], type: Array})
@@ -31,7 +32,8 @@
         <label :for="location">Location<input :id="location" name="location" type="text" v-model="location" /></label>
     </form>
     <button @click="fetchJobs" :disabled="loading">Fetch Jobs</button>
-</template>
+    <LoadingAnimation v-model:loading="loading"/>
+    </template>
 
 <style scoped>
     form {
