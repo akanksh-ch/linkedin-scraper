@@ -1,8 +1,10 @@
 <script setup>
     import { supabase } from '../lib/supabaseClient';
+    import { ref } from 'vue';
     const role = defineModel('role', {default:'Software Engineer'});
     const location = defineModel('location', {default:'London, United Kingdom'});
     const jobs = defineModel('jobs', {default: [], type: Array})
+    const loading = ref(false);
     
     async function fetchJobs() {
         /*
@@ -12,13 +14,14 @@
         
         console.log(`${url}?keywords=${keywords}&location=${location_data}`)
         */
-        
         console.log('fetch triggered!')
+        loading.value = true
         const dataFetched = await supabase.functions.invoke('fetchJobData', {
             body: {name: 'Functions', keywords: role.value, location: location.value}
         })
         console.log(`resulted data: ${JSON.stringify(dataFetched)}`)
         jobs.value = dataFetched.data
+        loading.value = false
     }
 
 </script>
@@ -27,7 +30,7 @@
         <label :for="role">Role<input :id="role" name="role" type="text" v-model="role" /></label>
         <label :for="location">Location<input :id="location" name="location" type="text" v-model="location" /></label>
     </form>
-    <button @click="fetchJobs">Fetch Jobs</button>
+    <button @click="fetchJobs" :disabled="loading">Fetch Jobs</button>
 </template>
 
 <style scoped>
@@ -55,5 +58,11 @@
         padding: 0.4rem;
         outline: none;
         margin-bottom: 1rem;
+    }
+    
+    button:disabled,
+    button[disabled] {
+        background-color: #004084;
+        color: hsl(0, 0%, 64%);
     }
    </style>
