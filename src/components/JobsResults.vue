@@ -4,7 +4,7 @@
 
 <template>
   <div class="wrapper">
-    <div class="job" v-if="jobs.length > 0" v-for="job in jobs" :key="job.title">
+    <div class="job" v-if="jobs.length > 0" v-for="job in jobs" :key="job.title" :description="job.description">
       <strong><a :href=job.url>{{ job.title }}</a></strong> - <strong>{{ job.company }}</strong>
       <p>{{ job.location }}</p>
     </div>  
