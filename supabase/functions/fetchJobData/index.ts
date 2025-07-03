@@ -47,7 +47,12 @@ Deno.serve(async (req) => {
     info.url = jobsDescUrl;
     
     // Job description
-    const jobsDescFetched = await(await fetch(jobsDescUrl)).text();
+    const jobsDescFetched = await(await fetch(jobsDescUrl, {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+        "Accept": "text/html",
+      },
+    })).text();
     const jobsDescDoc = new DOMParser().parseFromString(jobsDescFetched, 'text/html');
     info.description = jobsDescDoc.querySelector('.show-more-less-html')?.innerText || 'No job description found';
 
@@ -64,7 +69,7 @@ Deno.serve(async (req) => {
 
   const { error } =  await supabase
   .from('linkedin_listings')
-  .insert(final)
+  .upsert(final)
   
   if (error) { 
     console.error(error)
