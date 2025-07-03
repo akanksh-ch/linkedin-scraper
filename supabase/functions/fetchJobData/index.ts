@@ -62,5 +62,13 @@ Deno.serve(async (req) => {
     final.push(info)
   }
 
+  const { error } =  await supabase
+  .from('linkedin_listings')
+  .insert(final)
+  
+  if (error) { 
+    console.error(error)
+  }
+
   return new Response(JSON.stringify(final), { headers: {...corsHeaders, 'Content-Type': 'application/json' } })
 })
