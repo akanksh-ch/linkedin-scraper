@@ -37,8 +37,16 @@ Deno.serve(async (req) => {
 
   const final = [] 
   
+  interface info {
+    title: string,
+    company: string,
+    location: string, 
+    url: string ,
+    description: string
+  }
+  
   for(let i = 0; i < jobs.length; i++) {
-    const info: {title: string, company: string, location: string, url: string , description: string} = {title: '', company: '', location: '', url: '', description: ''};
+    const info:info  = {title: '', company: '', location: '', url: '', description: ''};
     info.title = jobs[i].querySelector('.base-search-card__title')?.innerText ?? 'No title found';
     info.company = jobs[i].querySelector('.hidden-nested-link')?.innerText ?? 'No company found';
     info.location = jobs[i].querySelector('.job-search-card__location')?.innerText ?? 'No Location found';
@@ -75,6 +83,37 @@ Deno.serve(async (req) => {
   
   if (listingError) { 
     console.error(listingError)
+  }
+  
+  interface query_data {
+    listing_id: number,
+    role: string,
+    location: string,
+    user_id: string,
+  }
+  
+  const { data: authData } = await supabase.auth.getUser(req.headers.get('Authorization')!.replace('Bearer', ''))
+
+  const queryData: Array<query_data> = listingData?.map(listing => {
+    const query: query_data =  {
+      listing_id: listing.id,
+      location: listing.location,
+      role: listing.title,
+      user_id: authData!.user!.id
+    }
+
+    return query
+  }) ?? []
+
+  const { data: queryDataReturned, error: queryError } = await supabase
+  .from('queries')
+  .insert(queryData)
+  .select()
+  
+  console.log('query data inserted successfully', queryDataReturned)
+
+  if (queryError) {
+    console.error(queryError)
   }
 
   return new Response(JSON.stringify(final), { headers: {...corsHeaders, 'Content-Type': 'application/json' } })
