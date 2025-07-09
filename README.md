@@ -1,5 +1,21 @@
-# Vue 3 + Vite
+# 📄 Linkedin Scraper
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This repo contains the source code for [Linkedin Scraper](https://linkedin-scraper-peach.vercel.app/)
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+### Goal
+
+This web app should allow a user to search for a role and location and be given a sample list of listings from LinkedIn and have an AI use information from those listings to provide a guide on how to attain the role in said location.
+
+### Todo
+
+- [X] Fetch job listings from LinkedIn
+- [X] User authentication
+- [X] Logging of queries per user
+- [ ] Adding routes for history, login and AI
+    - [ ] Use [Vue Router](https://router.vuejs.org/) for each route
+    - [ ] Use [Pinia](https://pinia.vuejs.org/) to store supabase session between routes
+- [ ] AI Integration
+
+---
+
+This project was made with [Supabase](https://supabase.com) and [Vue](https://vuejs.org)
