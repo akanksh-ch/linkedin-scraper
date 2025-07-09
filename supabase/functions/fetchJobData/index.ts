@@ -1,7 +1,7 @@
 // 'Supabase Edge Function: Fetch LinkedIn jobs
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { DOMParser } from "jsr:@b-fuze/deno-dom";
-import { AuthAdminApi, createClient } from 'npm:@supabase/supabase-js'
+import { createClient } from 'npm:@supabase/supabase-js'
 
 console.info("Server started");
 
