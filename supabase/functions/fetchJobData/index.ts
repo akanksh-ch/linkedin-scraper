@@ -1,7 +1,7 @@
 // 'Supabase Edge Function: Fetch LinkedIn jobs
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { DOMParser } from "jsr:@b-fuze/deno-dom";
-import { createClient } from 'npm:@supabase/supabase-js'
+import { AuthAdminApi, createClient } from 'npm:@supabase/supabase-js'
 
 console.info("Server started");
 
@@ -93,6 +93,7 @@ Deno.serve(async (req) => {
   }
   
   const { data: authData } = await supabase.auth.getUser(req.headers.get('Authorization')!.replace('Bearer', ''))
+  console.log(authData)
 
   const queryData: Array<query_data> = listingData?.map(listing => {
     const query: query_data =  {
