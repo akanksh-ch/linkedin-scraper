@@ -97,8 +97,8 @@ Deno.serve(async (req) => {
   const queryData: Array<query_data> = listingData?.map(listing => {
     const query: query_data =  {
       listing_id: listing.id,
-      location: listing.location,
-      role: listing.title,
+      location: location,
+      role: keywords,
       user_id: authData!.user!.id
     }
 
