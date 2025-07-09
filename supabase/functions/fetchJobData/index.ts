@@ -92,9 +92,7 @@ Deno.serve(async (req) => {
     user_id: string,
   }
   
-  const { data: authData } = await supabase.auth.getUser(req.headers.get('Authorization')!.replace('Bearer', ''))
-  console.log('Token:', req.headers.get('Authorization')!.replace('Bearer', ''))
-  console.log(authData)
+  const { data: authData } = await supabase.auth.getUser(req.headers.get('Authorization')!.replace('Bearer ', ''))
 
   const queryData: Array<query_data> = listingData?.map(listing => {
     const query: query_data =  {
