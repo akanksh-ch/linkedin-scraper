@@ -1,10 +1,13 @@
 <script setup>
     import JobsForm from './JobsForm.vue';
     import JobsResults from './JobsResults.vue';
-    import { ref } from 'vue';
+    import { onMounted, ref } from 'vue';
+    import { getAuth } from '../auth';
     
-    const session = defineProps({
-        session: Object
+    const session = ref();
+    
+    onMounted(async () => {
+        session.value = await getAuth();
     })
     
     const jobs = ref([
