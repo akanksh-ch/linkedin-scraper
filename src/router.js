@@ -3,10 +3,12 @@ import { getAuth } from "./auth";
 
 import JobsPage from "./components/JobsPage.vue";
 import Auth from "./Auth.vue";
+import History from "./components/History.vue";
 
 const routes = [
     { path: '/', component: JobsPage},
     { path: '/login', component: Auth},
+    { path: '/history', component: History},
 ]
 
 const router = createRouter({
