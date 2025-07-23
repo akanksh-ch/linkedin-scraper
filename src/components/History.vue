@@ -4,6 +4,7 @@
     import HistoryListing from './HistoryListing.vue';
     
     const listings = ref()
+    const loading = ref(true)
     
     onMounted(async () => {
         const { data: { user } } = await supabase.auth.getUser()
@@ -28,12 +29,15 @@
         .limit(10) // for "Load More" feature later
         
         listings.value = [...data]
+        loading.value = false
         console.log(data)
     })
 </script>
 
 <template>
-    <div v-for="listing in listings" :key="listing.id">
+    
+    <div class="loader" v-if="loading"></div>
+    <div v-else v-for="listing in listings" :key="listing.id">
         <HistoryListing :listing="listing" />
     </div>
 </template>
@@ -45,5 +49,27 @@ div {
     margin: 1rem;
     padding: 2rem;
     border-radius: 5px;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: fit-content;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 30px;
+  border: none;
+  clip-path: inset(0 3ch 0 0);
+  animation: l4 1s steps(4) infinite;
+}
+.loader:before {
+  content:"Loading..."
+}
+@keyframes l4 {to{clip-path: inset(0 -1ch 0 0)}}
+
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 </style>
