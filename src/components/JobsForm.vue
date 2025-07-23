@@ -48,21 +48,4 @@
     input, button {
         margin-left: 1rem;
     }
-    
-    button {
-        background-color: #007AFF;
-        color: white;
-        border-radius: 1rem;
-        border: none;
-        font-size: 1rem;
-        padding: 0.4rem;
-        outline: none;
-        margin-bottom: 1rem;
-    }
-    
-    button:disabled,
-    button[disabled] {
-        background-color: #004084;
-        color: hsl(0, 0%, 64%);
-    }
    </style>

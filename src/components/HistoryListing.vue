@@ -32,13 +32,5 @@ button {
     top: 0;
     left: 50%;
     transform: translate(-50%, -0);
-    background-color: #007AFF;
-    color: white;
-    border-radius: 1rem;
-    border: none;
-    font-size: 1rem;
-    padding: 0.4rem;
-    outline: none;
-    margin-bottom: 1rem;
 }
 </style>

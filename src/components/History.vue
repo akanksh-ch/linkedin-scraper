@@ -6,7 +6,7 @@
     const listings = ref()
     const loading = ref(true)
     
-    onMounted(async () => {
+    async function fetchHistory(before = new Date().toISOString()) {
         const { data: { user } } = await supabase.auth.getUser()
         const { data, _error } = await supabase
         .from('queries')
@@ -26,12 +26,15 @@
             )`)
         .eq('user_id', user.id)
         .order('created_at', { ascending: false })
+        .lt('created_at', before)
         .limit(10) // for "Load More" feature later
         
         listings.value = [...data]
         loading.value = false
         console.log(data)
-    })
+    }
+    
+    onMounted(fetchHistory)
 </script>
 
 <template>
@@ -40,6 +43,7 @@
     <div v-else v-for="listing in listings" :key="listing.id">
         <HistoryListing :listing="listing" />
     </div>
+    <button @click="fetchHistory(listings.at(-1).created_at)">Load more</button>
 </template>
 
 <style scoped>
@@ -71,5 +75,12 @@ div {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+    
+button {
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -0);   
 }
 </style>
