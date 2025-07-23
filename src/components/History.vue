@@ -43,7 +43,7 @@ div {
     border-radius: 5px;
     border: solid 1px white;
     margin: 1rem;
-    padding: 1rem;
+    padding: 2rem;
     border-radius: 5px;
 }
 </style>
