@@ -3,7 +3,7 @@
     import { ref, onMounted } from 'vue';
     import HistoryListing from './HistoryListing.vue';
     
-    const listings = ref()
+    const listings = ref([])
     const loading = ref(true)
     
     async function fetchHistory(before = new Date().toISOString()) {
@@ -29,12 +29,24 @@
         .lt('created_at', before)
         .limit(10) // for "Load More" feature later
         
-        listings.value = [...data]
+        listings.value = [...listings.value, ...data]
         loading.value = false
         console.log(data)
     }
     
     onMounted(fetchHistory)
+    
+    // from 30secondsofcode.org/js/s/bottom-visible
+    const bottomVisible = () =>
+        document.documentElement.clientHeight + window.scrollY >=
+        (document.documentElement.scrollHeight ||
+        document.documentElement.clientHeight);
+    
+    document.onscroll = () => {
+        if (bottomVisible()) {
+            fetchHistory()
+        }
+    }
 </script>
 
 <template>
@@ -43,7 +55,6 @@
     <div v-else v-for="listing in listings" :key="listing.id">
         <HistoryListing :listing="listing" />
     </div>
-    <button @click="fetchHistory(listings.at(-1).created_at)">Load more</button>
 </template>
 
 <style scoped>
